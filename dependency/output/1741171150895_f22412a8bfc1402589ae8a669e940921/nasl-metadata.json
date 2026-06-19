@@ -1,0 +1,277 @@
+{
+  "ideVersion" : "3.11",
+  "name" : "generic_s3_file_connector",
+  "title" : "默认文件连接器-支持读取本地文件模式",
+  "description" : "低代码平台默认提供的文件连接器, 支持标准s3的文件存储",
+  "specVersion" : "1.0.0",
+  "type" : "connector",
+  "subType" : "connector",
+  "version" : "1.2.0",
+  "externalDependencyMap" : {
+    "maven" : [ {
+      "groupId" : "com.netease.cloud",
+      "artifactId" : "generic-s3-file-connector",
+      "version" : "1.2.0"
+    } ]
+  },
+  "compilerInfoMap" : {
+    "java" : [ {
+      "type" : "logic",
+      "javaTypes" : {
+        "" : "Boolean"
+      },
+      "naslName" : "testLogic",
+      "className" : "DefaultS3FileConnector",
+      "packageName" : "com.netease.cloud"
+    }, {
+      "type" : "logic",
+      "javaTypes" : {
+        "" : "com.netease.cloud.DefaultS3FileConnector",
+        "accessKey" : "String",
+        "secretKey" : "String",
+        "bucket" : "String",
+        "privateBucket" : "Boolean",
+        "endpoint" : "String",
+        "pathStyleAccessEnabled" : "Boolean",
+        "cdnAddress" : "String",
+        "sinkPath" : "String"
+      },
+      "naslName" : "initDefaultS3FileConnector",
+      "className" : "DefaultS3FileConnector",
+      "packageName" : "com.netease.cloud"
+    }, {
+      "type" : "logic",
+      "javaTypes" : {
+        "" : "Boolean",
+        "accessKey" : "String",
+        "secretKey" : "String",
+        "bucket" : "String",
+        "privateBucket" : "Boolean",
+        "endpoint" : "String",
+        "pathStyleAccessEnabled" : "Boolean",
+        "cdnAddress" : "String",
+        "sinkPath" : "String"
+      },
+      "naslName" : "testConnection",
+      "className" : "DefaultS3FileConnector",
+      "packageName" : "com.netease.cloud"
+    } ],
+    "connectorJar" : {
+      "groupId" : "com.netease.cloud",
+      "artifactId" : "generic-s3-file-connector",
+      "version" : "1.2.0"
+    },
+    "beanCreator" : {
+      "mainClass" : "com.netease.cloud.DefaultS3FileConnector",
+      "method" : "initDefaultS3FileConnector",
+      "params" : [ {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "accessKey"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "secretKey"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "bucket"
+      }, {
+        "javaClass" : "java.lang.Boolean",
+        "javaParamName" : "privateBucket"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "endpoint"
+      }, {
+        "javaClass" : "java.lang.Boolean",
+        "javaParamName" : "pathStyleAccessEnabled"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "cdnAddress"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "sinkPath"
+      } ],
+      "returnClass" : {
+        "packageName" : "com.netease.cloud",
+        "javaClassName" : "DefaultS3FileConnector"
+      }
+    },
+    "beanTester" : {
+      "mainClass" : "com.netease.cloud.DefaultS3FileConnector",
+      "method" : "testConnection",
+      "params" : [ {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "accessKey"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "secretKey"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "bucket"
+      }, {
+        "javaClass" : "java.lang.Boolean",
+        "javaParamName" : "privateBucket"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "endpoint"
+      }, {
+        "javaClass" : "java.lang.Boolean",
+        "javaParamName" : "pathStyleAccessEnabled"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "cdnAddress"
+      }, {
+        "javaClass" : "java.lang.String",
+        "javaParamName" : "sinkPath"
+      } ],
+      "returnClass" : {
+        "packageName" : "java.lang",
+        "javaClassName" : "Boolean"
+      }
+    }
+  },
+  "connectorKind" : "FILE_CONNECTOR",
+  "logics" : [ {
+    "concept" : "Logic",
+    "name" : "testLogic",
+    "description" : "",
+    "overridable" : false,
+    "params" : [ ],
+    "returns" : [ {
+      "concept" : "Return",
+      "name" : "result",
+      "description" : "",
+      "typeAnnotation" : {
+        "concept" : "TypeAnnotation",
+        "typeKind" : "union",
+        "typeNamespace" : "nasl.core",
+        "typeName" : "Union",
+        "typeArguments" : [ {
+          "concept" : "TypeAnnotation",
+          "typeKind" : "primitive",
+          "typeNamespace" : "nasl.core",
+          "typeName" : "Boolean"
+        }, {
+          "concept" : "TypeAnnotation",
+          "typeKind" : "reference",
+          "typeNamespace" : "nasl.ui",
+          "typeName" : "Error"
+        } ]
+      }
+    } ]
+  } ],
+  "properties" : [ {
+    "concept" : "Param",
+    "name" : "accessKey",
+    "description" : "",
+    "typeAnnotation" : {
+      "concept" : "TypeAnnotation",
+      "typeKind" : "primitive",
+      "typeNamespace" : "nasl.core",
+      "typeName" : "String"
+    },
+    "required" : false,
+    "spread" : false
+  }, {
+    "concept" : "Param",
+    "name" : "secretKey",
+    "description" : "",
+    "typeAnnotation" : {
+      "concept" : "TypeAnnotation",
+      "typeKind" : "primitive",
+      "typeNamespace" : "nasl.core",
+      "typeName" : "String"
+    },
+    "required" : false,
+    "spread" : false
+  }, {
+    "concept" : "Param",
+    "name" : "bucket",
+    "description" : "存储桶名称",
+    "typeAnnotation" : {
+      "concept" : "TypeAnnotation",
+      "typeKind" : "primitive",
+      "typeNamespace" : "nasl.core",
+      "typeName" : "String"
+    },
+    "required" : false,
+    "spread" : false
+  }, {
+    "concept" : "Param",
+    "name" : "privateBucket",
+    "description" : "私有桶：true，公共桶：false",
+    "typeAnnotation" : {
+      "concept" : "TypeAnnotation",
+      "typeKind" : "primitive",
+      "typeNamespace" : "nasl.core",
+      "typeName" : "Boolean"
+    },
+    "required" : false,
+    "spread" : false
+  }, {
+    "concept" : "Param",
+    "name" : "endpoint",
+    "description" : "存储服务地址",
+    "typeAnnotation" : {
+      "concept" : "TypeAnnotation",
+      "typeKind" : "primitive",
+      "typeNamespace" : "nasl.core",
+      "typeName" : "String"
+    },
+    "required" : false,
+    "spread" : false
+  }, {
+    "concept" : "Param",
+    "name" : "pathStyleAccessEnabled",
+    "description" : "oss或者nos填写false, 标准s3填写true",
+    "typeAnnotation" : {
+      "concept" : "TypeAnnotation",
+      "typeKind" : "primitive",
+      "typeNamespace" : "nasl.core",
+      "typeName" : "Boolean"
+    },
+    "required" : false,
+    "spread" : false
+  }, {
+    "concept" : "Param",
+    "name" : "cdnAddress",
+    "description" : "cdn地址, 未开启则不填",
+    "typeAnnotation" : {
+      "concept" : "TypeAnnotation",
+      "typeKind" : "primitive",
+      "typeNamespace" : "nasl.core",
+      "typeName" : "String"
+    },
+    "defaultValue" : {
+      "playground" : [ ],
+      "expression" : {
+        "folded" : false,
+        "value" : "''",
+        "concept" : "StringLiteral"
+      },
+      "concept" : "DefaultValue"
+    },
+    "required" : false,
+    "spread" : false
+  }, {
+    "concept" : "Param",
+    "name" : "sinkPath",
+    "description" : "存储子路径，可不填; 若需要本地存储模式，sinkPath为local;/path/subPath",
+    "typeAnnotation" : {
+      "concept" : "TypeAnnotation",
+      "typeKind" : "primitive",
+      "typeNamespace" : "nasl.core",
+      "typeName" : "String"
+    },
+    "defaultValue" : {
+      "playground" : [ ],
+      "expression" : {
+        "folded" : false,
+        "value" : "''",
+        "concept" : "StringLiteral"
+      },
+      "concept" : "DefaultValue"
+    },
+    "required" : false,
+    "spread" : false
+  } ],
+  "triggers" : [ ]
+}

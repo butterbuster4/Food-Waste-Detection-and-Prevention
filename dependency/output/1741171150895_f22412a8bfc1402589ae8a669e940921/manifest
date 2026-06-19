@@ -1,0 +1,8 @@
+Plugin-Version: 1.4.3
+Library-Type: Backend
+Group-Id: com.netease.cloud
+Artifact-Id: generic-s3-file-connector
+Version: 1.2.0
+Metadata-File: nasl-metadata.json
+Library-Jar: library/generic-s3-file-connector-1.2.0.jar
+Library-Pom: library/generic-s3-file-connector-1.2.0.pom

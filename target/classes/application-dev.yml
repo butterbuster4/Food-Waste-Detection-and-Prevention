@@ -1,0 +1,177 @@
+management:
+  server:
+    port: 9090
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.id}
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include:
+        - health
+        - prometheus
+logging:
+  file:
+    path: ${user.home}
+  path: ${logging.file.path}
+spring:
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations[0]: classpath:/static/
+    static-locations[1]: classpath:/static/assets/
+    static-locations[2]: classpath:/static/packages/
+  main:
+    lazy-initialization: false
+  application:
+    name: grp05h5
+    id: e6d84f39-951f-4832-ad22-5ad722cd346a
+  liquibase:
+    enabled: false
+  initDatabase:
+    enabled: false
+  quartz:
+    enabled: false
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/food_waste_h5?serverTimezone=Asia/Shanghai&useTimezone=true
+    username: bob
+    password: '1234'
+    connection-timeout: 3000
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  messages:
+    basename: i18n/messages
+mybatis:
+  mapper-locations: classpath*:mappings/**/*Mapper.xml
+  type-handlers-package: com.plt.grp05h5.repository.handler
+  configuration:
+    database-id: mysql
+    default-enum-type-handler: com.plt.grp05h5.repository.handler.AutoEnumTypeHandler
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+lcp:
+  snowflakeNodeId: null
+  authCenter:
+    enable: true
+    address: http://nuims.low-code:8081/nuims
+    host: nuims.low-code
+    security:
+      lockMilliseconds: 900000
+      maxFailureTimes: 5
+    taskEnable: true
+    noAuthPaths: /upload:POST,/upload/download_files:POST,/api/logics/downloadFile:POST,/api/logics/downloadFile:GET
+  gatewayUrl: ''
+  uiResourceAddress: /client.js
+  gatewayType: light
+  upload:
+    sinkType: nos
+    sinkPath: /app
+    s3Address: https://nos-eastchina1.126.net
+    s3AccessKey: ''
+    s3SecretKey: ''
+    s3Bucket: lcap-static-saas
+    access: public
+    ttl: -1.0
+    cdnAddress: ''
+  logResponse: false
+  logRequest: true
+  report:
+    host: ''
+    tokenKey: ''
+    domainId: null
+    projectId: null
+    reportIdMap: {}
+    componentIdMap: {}
+  nuims: http://nuims.low-code:8081
+  private: null
+  frontends:
+    m:
+      name: m
+      path: /
+      title: H5端
+      type: h5
+  quartzTables: {}
+upload:
+  base-path: 'D:/school/2/GRP-FoodWaste-H5(grp05h5)/data'
+file:
+  types: text/plain;text/html;text/css;application/javascript
+logicAuthFlag: false
+auth:
+  token:
+    secret: b61a1f5ba4a0a47
+    expire: 86400
+  types: ''
+connector:
+  default_fileStorage_connection:
+    accessKey: ''
+    secretKey: ''
+    bucket: lcap-static-saas
+    privateBucket: 'false'
+    endpoint: '10.176.64.148:8080'
+    pathStyleAccessEnabled: 'true'
+    cdnAddress: null
+    sinkPath: 'D:/school/2/GRP-FoodWaste-H5(grp05h5)/data'
+  food_waste:
+    accessKey: '1234'
+    secretKey: '1234'
+    bucket: '1234'
+    privateBucket: 'false'
+    endpoint: '10.176.64.148:8080'
+    pathStyleAccessEnabled: 'true'
+    cdnAddress: '1234'
+    sinkPath: 'D:/school/2/GRP-FoodWaste-H5(grp05h5)/data'
+  food_waste_h5:
+    accessKey: '1234'
+    secretKey: '1234'
+    bucket: '1234'
+    privateBucket: 'false'
+    endpoint: '10.176.64.148:8080'
+    pathStyleAccessEnabled: 'true'
+    cdnAddress: '1234'
+    sinkPath: 'D:/school/2/GRP-FoodWaste-H5(grp05h5)/data'
+gw:
+  app:
+    addr:
+      lowcode: http://lcap.low-code:22988
+      nuims: http://nuims.low-code:8081
+lcap:
+  domain:
+    package:
+      structure: com.plt.grp05h5.domain.structure
+      anonymous_structure: com.plt.grp05h5.domain.structure.anonymous
+      entities: com.plt.grp05h5.domain.entities
+      enumeration: com.plt.grp05h5.domain.enumeration
+custom:
+  api:
+    context-path: /
+  system:
+    time-zone: user
+fileStorage:
+  lcap_default_connection: '{"refConnection":"","defaultConnection":false,"title":"系统文件存储"}'
+  lcap_file_group_0: '{"refConnection":"app.connections.food_waste_h5","defaultConnection":true,"title":"自定义文件存储"}'

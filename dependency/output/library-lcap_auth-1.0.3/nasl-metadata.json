@@ -1,0 +1,209 @@
+{
+  "ideVersion": "3.13",
+  "name": "lcap_auth",
+  "title": "lcap-auth",
+  "description": "",
+  "specVersion": "1.0.0",
+  "type": "module",
+  "subType": "extension",
+  "version": "1.0.3",
+  "externalDependencyMap": {"maven": [{
+    "groupId": "com.netease.lowcode",
+    "artifactId": "lcap-auth",
+    "version": "1.0.3"
+  }]},
+  "compilerInfoMap": {"java": [
+    {
+      "javaTypes": {
+        "displayName": "String",
+        "extensionInfos": "Map<String, String>",
+        "userName": "String",
+        "userId": "String"
+      },
+      "type": "structure",
+      "naslName": "LCAPUser",
+      "className": "LCAPUser",
+      "packageName": "com.netease.lowcode.auth.domain"
+    },
+    {
+      "javaTypes": {"": "com.netease.lowcode.auth.domain.LCAPUser"},
+      "type": "logic",
+      "naslName": "getUser",
+      "className": "LCAPAuthService",
+      "packageName": "com.netease.lowcode.auth"
+    },
+    {
+      "javaTypes": {
+        "": "Boolean",
+        "lcapUser": "com.netease.lowcode.auth.domain.LCAPUser"
+      },
+      "type": "logic",
+      "naslName": "createToken",
+      "className": "LCAPAuthService",
+      "packageName": "com.netease.lowcode.auth"
+    },
+    {
+      "javaTypes": {"": "Boolean"},
+      "type": "logic",
+      "naslName": "removeToken",
+      "className": "LCAPAuthService",
+      "packageName": "com.netease.lowcode.auth"
+    }
+  ]},
+  "logics": [
+    {
+      "concept": "Logic",
+      "name": "getUser",
+      "description": "获取当前登录用户",
+      "overridable": true,
+      "typeParams": [],
+      "params": [],
+      "returns": [{
+        "concept": "Return",
+        "name": "result",
+        "description": "LCAPUser 用户信息",
+        "typeAnnotation": {
+          "concept": "TypeAnnotation",
+          "typeKind": "reference",
+          "typeNamespace": "extensions.lcap_auth.structures",
+          "typeName": "LCAPUser"
+        }
+      }]
+    },
+    {
+      "concept": "Logic",
+      "name": "createToken",
+      "description": "创建Token",
+      "overridable": true,
+      "typeParams": [],
+      "params": [{
+        "concept": "Param",
+        "name": "lcapUser",
+        "description": "用户信息",
+        "typeAnnotation": {
+          "concept": "TypeAnnotation",
+          "typeKind": "reference",
+          "typeNamespace": "extensions.lcap_auth.structures",
+          "typeName": "LCAPUser"
+        },
+        "required": true,
+        "spread": false
+      }],
+      "returns": [{
+        "concept": "Return",
+        "name": "result",
+        "description": "",
+        "typeAnnotation": {
+          "concept": "TypeAnnotation",
+          "typeKind": "primitive",
+          "typeNamespace": "nasl.core",
+          "typeName": "Boolean"
+        }
+      }]
+    },
+    {
+      "concept": "Logic",
+      "name": "removeToken",
+      "description": "清除Token",
+      "overridable": true,
+      "typeParams": [],
+      "params": [],
+      "returns": [{
+        "concept": "Return",
+        "name": "result",
+        "description": "",
+        "typeAnnotation": {
+          "concept": "TypeAnnotation",
+          "typeKind": "primitive",
+          "typeNamespace": "nasl.core",
+          "typeName": "Boolean"
+        }
+      }]
+    }
+  ],
+  "structures": [{
+    "concept": "Structure",
+    "name": "LCAPUser",
+    "description": "System built in generic class LCAPUser",
+    "properties": [
+      {
+        "concept": "StructureProperty",
+        "name": "userId",
+        "typeAnnotation": {
+          "concept": "TypeAnnotation",
+          "typeKind": "primitive",
+          "typeNamespace": "nasl.core",
+          "typeName": "String"
+        },
+        "required": true
+      },
+      {
+        "concept": "StructureProperty",
+        "name": "userName",
+        "typeAnnotation": {
+          "concept": "TypeAnnotation",
+          "typeKind": "primitive",
+          "typeNamespace": "nasl.core",
+          "typeName": "String"
+        },
+        "required": true
+      },
+      {
+        "concept": "StructureProperty",
+        "name": "displayName",
+        "typeAnnotation": {
+          "concept": "TypeAnnotation",
+          "typeKind": "primitive",
+          "typeNamespace": "nasl.core",
+          "typeName": "String"
+        },
+        "required": false
+      },
+      {
+        "concept": "StructureProperty",
+        "name": "extensionInfos",
+        "typeAnnotation": {
+          "concept": "TypeAnnotation",
+          "typeKind": "generic",
+          "typeNamespace": "nasl.collection",
+          "typeName": "Map",
+          "typeArguments": [
+            {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeNamespace": "nasl.core",
+              "typeName": "String"
+            },
+            {
+              "concept": "TypeAnnotation",
+              "typeKind": "primitive",
+              "typeNamespace": "nasl.core",
+              "typeName": "String"
+            }
+          ]
+        },
+        "required": false
+      }
+    ]
+  }],
+  "summary": {
+    "name": "lcap_auth",
+    "title": "lcap-auth",
+    "version": "1.0.3",
+    "description": "",
+    "logics": [
+      {
+        "name": "getUser",
+        "description": "获取当前登录用户"
+      },
+      {
+        "name": "createToken",
+        "description": "创建Token"
+      },
+      {
+        "name": "removeToken",
+        "description": "清除Token"
+      }
+    ]
+  }
+}

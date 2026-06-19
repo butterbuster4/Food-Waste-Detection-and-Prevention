@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=app-client-facade-1.0.0.jar -DgroupId=com.netease.cloud -DartifactId=app-client-facade -Dversion=1.0.0 -Dpackaging=jar -DgeneratePom=true -DpomFile=pom.xml

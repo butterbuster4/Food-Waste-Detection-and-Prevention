@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>@lcap/mobile-ui组件库</title><script src="https://unpkg.com/vue/dist/vue.js"></script><link href="./index.css" rel="preload" as="style"><link href="./index.js" rel="preload" as="script"><link href="./index.css?2e6c5044ff3bb1d616d5" rel="stylesheet"><script src="./index.js?2e6c5044ff3bb1d616d5"></script></head><body><div id="app"><u-button @click="show">Click me!</u-button></div><script>Vue.use(CloudUI);
+        new Vue({
+            el: '#app',
+            methods: {
+                show: function () {
+                    this.$alert('Hello World!');
+                },
+            },
+        });</script></body></html>

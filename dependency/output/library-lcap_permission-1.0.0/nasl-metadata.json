@@ -1,0 +1,351 @@
+{
+  "ideVersion": "2.22",
+  "name": "lcap_permission",
+  "title": "lcap-permission",
+  "description": "",
+  "specVersion": "1.0.0",
+  "type": "module",
+  "subType": "extension",
+  "version": "1.0.0",
+  "externalDependencyMap": {"maven": [{
+    "groupId": "com.netease.lowcode",
+    "artifactId": "lcap-permission",
+    "version": "1.0.0"
+  }]},
+  "compilerInfoMap": {"java": [
+    {
+      "type": "structure",
+      "className": "DeployResourceMetaData",
+      "packageName": "com.netease.lowcode.permission.domain",
+      "naslName": "DeployResourceMetaData",
+      "javaTypes": {
+        "clientType": "String",
+        "createdTime": "String",
+        "description": "String",
+        "resourceType": "String",
+        "resourceValue": "String"
+      }
+    },
+    {
+      "type": "structure",
+      "className": "UserResourceQueryResult",
+      "packageName": "com.netease.lowcode.permission.domain",
+      "naslName": "UserResourceQueryResult",
+      "javaTypes": {
+        "clientType": "String",
+        "createdTime": "String",
+        "description": "String",
+        "resourceType": "String",
+        "resourceValue": "String"
+      }
+    },
+    {
+      "type": "logic",
+      "className": "LCAPPermissionService",
+      "packageName": "com.netease.lowcode.permission",
+      "naslName": "uploadResource",
+      "javaTypes": {
+        "": "Boolean",
+        "resourceMetaDataCollect": "List<com.netease.lowcode.permission.domain.DeployResourceMetaData>"
+      }
+    },
+    {
+      "type": "logic",
+      "className": "LCAPPermissionService",
+      "packageName": "com.netease.lowcode.permission",
+      "naslName": "checkPermission",
+      "javaTypes": {
+        "": "Boolean",
+        "userId": "String",
+        "resourceValue": "String",
+        "resourceType": "String",
+        "clientType": "String"
+      }
+    },
+    {
+      "type": "logic",
+      "className": "LCAPPermissionService",
+      "packageName": "com.netease.lowcode.permission",
+      "naslName": "getUserResources",
+      "javaTypes": {
+        "": "List<com.netease.lowcode.permission.domain.UserResourceQueryResult>",
+        "userId": "String"
+      }
+    }
+  ]},
+  "structures": [
+    {
+      "name": "DeployResourceMetaData",
+      "properties": [
+        {
+          "name": "resourceValue",
+          "description": "资源值(通常为浏览器上的访问路径或逻辑请求路径)",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "resourceType",
+          "description": "资源的类型(表示当前资源是页面还是组件或者逻辑)",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "clientType",
+          "description": "资源所属的端标识(多端场景下存在重名资源)",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "description",
+          "description": "资源的描述信息",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "createdTime",
+          "description": "资源的创建时间",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        }
+      ],
+      "description": "System built in generic class LCAPPermissionService",
+      "concept": "Structure"
+    },
+    {
+      "name": "UserResourceQueryResult",
+      "properties": [
+        {
+          "name": "resourceValue",
+          "description": "资源值(通常为浏览器上的访问路径或逻辑请求路径)",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "resourceType",
+          "description": "资源的类型(表示当前资源是页面还是组件或者逻辑)",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "clientType",
+          "description": "资源所属的端标识(多端场景下存在重名资源)",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "description",
+          "description": "资源的描述信息",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "createdTime",
+          "description": "资源的创建时间",
+          "required": false,
+          "concept": "StructureProperty",
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        }
+      ],
+      "description": "System built in generic class DeployLogicAuthMetaData",
+      "concept": "Structure"
+    }
+  ],
+  "logics": [
+    {
+      "name": "uploadResource",
+      "description": "应用资源数据上报",
+      "params": [{
+        "name": "resourceMetaDataCollect",
+        "description": "应用发布时上报资源数据",
+        "concept": "Param",
+        "required": true,
+        "typeAnnotation": {
+          "typeName": "List",
+          "typeArguments": [{
+            "typeName": "DeployResourceMetaData",
+            "typeNamespace": "extensions.lcap_permission.structures",
+            "typeKind": "reference",
+            "concept": "TypeAnnotation"
+          }],
+          "typeNamespace": "nasl.collection",
+          "typeKind": "generic",
+          "concept": "TypeAnnotation"
+        }
+      }],
+      "returns": [{
+        "name": "result",
+        "description": "上报是否成功",
+        "concept": "Return",
+        "typeAnnotation": {
+          "typeName": "Boolean",
+          "typeNamespace": "nasl.core",
+          "typeKind": "primitive",
+          "concept": "TypeAnnotation"
+        }
+      }],
+      "concept": "Logic",
+      "overridable": true
+    },
+    {
+      "name": "checkPermission",
+      "description": "校验用户访问资源的权限",
+      "params": [
+        {
+          "name": "userId",
+          "description": "用户唯一标识",
+          "concept": "Param",
+          "required": true,
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "resourceValue",
+          "description": "资源值(通常为浏览器上的访问路径)",
+          "concept": "Param",
+          "required": true,
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "resourceType",
+          "description": "资源的类型(表示当前资源是页面还是组件)",
+          "concept": "Param",
+          "required": true,
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        },
+        {
+          "name": "clientType",
+          "description": "资源所属的端标识(多端场景下存在重名资源)",
+          "concept": "Param",
+          "required": true,
+          "typeAnnotation": {
+            "typeName": "String",
+            "typeNamespace": "nasl.core",
+            "typeKind": "primitive",
+            "concept": "TypeAnnotation"
+          }
+        }
+      ],
+      "returns": [{
+        "name": "result",
+        "description": "用户是否能访问指定资源",
+        "concept": "Return",
+        "typeAnnotation": {
+          "typeName": "Boolean",
+          "typeNamespace": "nasl.core",
+          "typeKind": "primitive",
+          "concept": "TypeAnnotation"
+        }
+      }],
+      "concept": "Logic",
+      "overridable": true
+    },
+    {
+      "name": "getUserResources",
+      "description": "根据传入的用户id查询其能访问的UI资源列表",
+      "params": [{
+        "name": "userId",
+        "description": "用户id",
+        "concept": "Param",
+        "required": true,
+        "typeAnnotation": {
+          "typeName": "String",
+          "typeNamespace": "nasl.core",
+          "typeKind": "primitive",
+          "concept": "TypeAnnotation"
+        }
+      }],
+      "returns": [{
+        "name": "result",
+        "description": "用户id对应的可以访问的UI资源列表",
+        "concept": "Return",
+        "typeAnnotation": {
+          "typeName": "List",
+          "typeArguments": [{
+            "typeName": "UserResourceQueryResult",
+            "typeNamespace": "extensions.lcap_permission.structures",
+            "typeKind": "reference",
+            "concept": "TypeAnnotation"
+          }],
+          "typeNamespace": "nasl.collection",
+          "typeKind": "generic",
+          "concept": "TypeAnnotation"
+        }
+      }],
+      "concept": "Logic",
+      "overridable": true
+    }
+  ]
+}

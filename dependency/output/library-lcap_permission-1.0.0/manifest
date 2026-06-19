@@ -1,0 +1,12 @@
+Plugin-Version: 1.1.2
+Library-Type: Backend
+Group-Id: com.netease.lowcode
+Artifact-Id: lcap-permission
+Version: 1.0.0
+Metadata-File: nasl-metadata.json
+Library-Jar: library\lcap-permission-1.0.0.jar
+Library-Pom: library\lcap-permission-1.0.0.pom
+com/netease/lowcode/nasl-metadata-collector/0.3.0/nasl-metadata-collector-0.3.0.jar: dependencies\com\netease\lowcode\nasl-metadata-collector\0.3.0\nasl-metadata-collector-0.3.0.jar
+com/netease/lowcode/nasl-metadata-collector/0.3.0/nasl-metadata-collector-0.3.0.pom: dependencies\com\netease\lowcode\nasl-metadata-collector\0.3.0\nasl-metadata-collector-0.3.0.pom
+org/springframework/boot/spring-boot-starter-parent/2.3.0.RELEASE/spring-boot-starter-parent-2.3.0.RELEASE.pom: dependencies\org\springframework\boot\spring-boot-starter-parent\2.3.0.RELEASE\spring-boot-starter-parent-2.3.0.RELEASE.pom
+org/springframework/boot/spring-boot-dependencies/2.3.0.RELEASE/spring-boot-dependencies-2.3.0.RELEASE.pom: dependencies\org\springframework\boot\spring-boot-dependencies\2.3.0.RELEASE\spring-boot-dependencies-2.3.0.RELEASE.pom

@@ -1,0 +1,2 @@
+call mvn install:install-file -Dfile=nuims-auth-2.0.0.jar -DgroupId=com.netease.cloud.nuims -DartifactId=nuims-auth -Dversion=2.0.0 -Dpackaging=jar -DgeneratePom=true -DpomFile=nuims-auth-2.0.0.pom
+pause
