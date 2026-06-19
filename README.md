@@ -43,6 +43,27 @@
 </p>
 
 ---
+
+## 👨‍💻 Individual Contribution
+
+### Yan GE
+
+I was mainly responsible for the deep learning and intelligent analysis components of the system. My work covered the full AI pipeline from user identification to food waste and nutrition analysis.
+
+My main contributions include:
+
+* Implemented the **face recognition module** to identify users and link each uploaded record to the corresponding user profile in the database.
+* Developed the **food classification module** to recognize different food categories from uploaded images.
+* Built the **food segmentation module** to locate and separate food regions from the input images.
+* Integrated **image depth estimation** to support food volume estimation from 2D food images.
+* Designed the **food volume and mass estimation pipeline**, combining segmentation results, depth information, and food density data.
+* Integrated the **FatSecret API** to retrieve food density and nutritional information for recognized food items.
+* Calculated the estimated **food mass, calories, and nutritional composition** based on the recognized food type, estimated volume, and external nutrition data.
+* Stored the analysis results into the corresponding database entries based on the recognized user identity.
+* Deployed a lightweight local **LLM-based recommendation module**, which reads the user’s historical food waste and nutrition records from the database and generates personalized dietary suggestions and food waste analysis reports.
+
+----
+
 ## 📧Contributors
 - [Yan GE](contributors/YanGe.md)
 - [Minjie WU](contributors/MinjieWu.md)
