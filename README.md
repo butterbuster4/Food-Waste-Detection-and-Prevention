@@ -19,7 +19,11 @@
 - **Managers** can view all uploaded data and analyze their proportions to make adjustments.This system not only helps optimize the restaurant supply chain, but also promotes social environmental protection concepts, reduces resource waste, and enhances customers' dining experience. 
 
 ---
-## 📑Results
+## 📑Background Research
+- [Test Plan](docs/backgroundResearch/Background_Research.docx)
+
+---
+## 📑Test Plan
 - [Test Plan](docs/test_report.md)
 
 ---
