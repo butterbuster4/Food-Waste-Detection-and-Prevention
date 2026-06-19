@@ -64,6 +64,14 @@ My main contributions include:
 
 ----
 
+## Third-Party Acknowledgement
+
+The volume estimation module under `CV/volume-detection/` contains code adapted from an open-source project by Alexandros Graikos, licensed under the MIT License. The original license notice is preserved in `CV/volume-detection/LICENSE`.
+
+Modifications made in this project include integration with our food segmentation pipeline, adaptation for food waste volume estimation, and connection with food density and nutrition analysis.
+
+----
+
 ## 📧Contributors
 - [Yan GE](contributors/YanGe.md)
 - [Minjie WU](contributors/MinjieWu.md)
