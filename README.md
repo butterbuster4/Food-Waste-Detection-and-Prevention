@@ -20,11 +20,21 @@
 
 ---
 ## 📑Background Research
-- [Test Plan](docs/backgroundResearch/Background_Research.docx)
+- [Background Research](docs/backgroundResearch/Background_Research.docx)
 
 ---
 ## 📑Test Plan
 - [Test Plan](docs/test_report.md)
+
+---
+
+## 📑Class Diagram
+- [Class Diagram](images/Class_Diagram_User.png)
+
+---
+
+## 📑Sequence Diagram
+- [Sequence Diagram](images/user_seq.png)
 
 ---
 ## 🌟Features
