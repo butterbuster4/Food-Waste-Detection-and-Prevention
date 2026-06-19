@@ -29,7 +29,7 @@
 ---
 
 ## 📑Class Diagram
-- [Class Diagram](images/Class_Diagram_User.png)
+- [Class Diagram](images/Class_Diagram_User_.png)
 
 ---
 
