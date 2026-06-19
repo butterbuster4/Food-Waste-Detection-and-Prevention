@@ -1,0 +1,156 @@
+import os
+import sys
+import cv2
+import numpy as np
+import time
+import requests
+from keras.models import load_model
+from ultralytics import YOLO
+from collections import deque
+
+# Load models
+detection_model = YOLO("./models/detection.pt")
+detection_model.overrides['conf'] = 0.5  # Confidence threshold
+detection_model.overrides['iou'] = 0.5   # IoU threshold
+classification_model = load_model("./models/classification.keras")
+
+# Object tracking
+BUFFER_SIZE = 5  # Requires 5 consecutive frames to classify
+IOU_THRESHOLD = 0.8  # Threshold to determine if a bounding box is stable
+trackers = {}  # Object ID -> (coordinates, frame count, stable, accumulated frames, lost frames)
+
+# Output directory
+OUTPUT_DIR = "output"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# Food categories
+classification_labels = ["Apple pie", "Baby back ribs", "Baklava", "Beef carpaccio", "Beef tartare", "Beet salad", 
+    "Beignets", "Bibimbap", "Bread pudding", "Breakfast burrito", "Bruschetta", "Caesar salad", "Cannoli", "Caprese salad", 
+    "Carrot cake", "Ceviche", "Cheesecake", "Cheese plate", "Chicken curry", "Chicken quesadilla", "Chicken wings", 
+    "Chocolate cake", "Chocolate mousse", "Churros", "Clam chowder", "Club sandwich", "Crab cakes", "Creme brulee", 
+    "Croque madame", "Cup cakes", "Deviled eggs", "Donuts", "Dumplings", "Edamame", "Eggs benedict", "Escargots", 
+    "Falafel", "Filet mignon", "Fish and chips", "Foie gras", "French fries", "French onion soup", "French toast", 
+    "Fried calamari", "Fried rice", "Frozen yogurt", "Garlic bread", "Gnocchi", "Greek salad", "Grilled cheese sandwich", 
+    "Grilled salmon", "Guacamole", "Gyoza", "Hamburger", "Hot and sour soup", "Hot dog", "Huevos rancheros", "Hummus", 
+    "Ice cream", "Lasagna", "Lobster bisque", "Lobster roll sandwich", "Macaroni and cheese", "Macarons", "Miso soup", 
+    "Mussels", "Nachos", "Omelette", "Onion rings", "Oysters", "Pad thai", "Paella", "Pancakes", "Panna cotta", 
+    "Peking duck", "Pho", "Pizza", "Pork chop", "Poutine", "Prime rib", "Pulled pork sandwich", "Ramen", "Ravioli", 
+    "Red velvet cake", "Risotto", "Samosa", "Sashimi", "Scallops", "Seaweed salad", "Shrimp and grits", 
+    "Spaghetti bolognese", "Spaghetti carbonara", "Spring rolls", "Steak", "Strawberry shortcake", "Sushi", "Tacos", 
+    "Takoyaki", "Tiramisu", "Tuna tartare", "Waffles"]
+
+def preprocess_image(img, target_size=640):
+    """Preprocess input for the classification model"""
+    img_resized = cv2.resize(img, (target_size, target_size))
+    img_normalized = img_resized / 255.0
+    img_normalized = (img_normalized - 0.5) / 0.5
+    return np.expand_dims(img_normalized, axis=0)
+
+def iou(boxA, boxB):
+    """Calculate Intersection over Union (IoU) between two bounding boxes"""
+    xA = max(boxA[0], boxB[0])
+    yA = max(boxA[1], boxB[1])
+    xB = min(boxA[2], boxB[2])
+    yB = min(boxA[3], boxB[3])
+
+    interArea = max(0, xB - xA) * max(0, yB - yA)
+    boxAArea = (boxA[2] - boxA[0]) * (boxA[3] - boxA[1])
+    boxBArea = (boxB[2] - boxB[0]) * (boxB[3] - boxB[1])
+
+    return interArea / float(boxAArea + boxBArea - interArea)
+
+def process_frame(frame):
+    """Detect food and classify it"""
+    global trackers
+
+    results = detection_model(frame, stream=True, verbose=False)
+    detected_objects = {}  # Store detected objects in the current frame
+
+    for result in results:
+        for box in result.boxes:
+            x1, y1, x2, y2 = map(int, box.xyxy[0])
+            confidence = box.conf.item()
+            if confidence < 0.5:
+                continue
+
+            # Match detected objects with tracked objects
+            best_match_id = None
+            best_iou = 0
+            for obj_id, (prev_box, count, stable, buffer, lost_frames) in trackers.items():
+                iou_score = iou((x1, y1, x2, y2), prev_box)
+                if iou_score > best_iou and iou_score > IOU_THRESHOLD:
+                    best_iou = iou_score
+                    best_match_id = obj_id
+
+            if best_match_id is not None:
+                count, stable, buffer, lost_frames = trackers[best_match_id][1:]
+                count += 1
+                lost_frames = 0
+                if count >= BUFFER_SIZE:
+                    stable = True  # Mark as stable after 5 frames
+            else:
+                best_match_id = len(trackers) + 1
+                count, stable, buffer, lost_frames = 1, False, deque(maxlen=BUFFER_SIZE), 0
+
+            detected_objects[best_match_id] = ((x1, y1, x2, y2), count, stable, buffer, lost_frames)
+
+            final_category = "Unknown"  # Default category
+            if stable and len(buffer) < BUFFER_SIZE:
+                cropped_img = frame[y1:y2, x1:x2]
+                if cropped_img.size == 0:
+                    continue
+                preprocessed_img = preprocess_image(cropped_img)
+                predictions = classification_model.predict(preprocessed_img, verbose=0)
+                predicted_class = np.argmax(predictions[0])
+                category = classification_labels[predicted_class]
+                buffer.append(category)
+
+                if len(buffer) == BUFFER_SIZE:
+                    final_category = max(set(buffer), key=buffer.count)
+                    # Send image and category to Program 2
+                    _, img_encoded = cv2.imencode('.jpg', cropped_img)
+                    try:
+                        response = requests.post(
+                            "http://localhost:5000/process",
+                            files={"image": ("image.jpg", img_encoded.tobytes(), "image/jpeg")},
+                            data={"food_category": final_category},
+                            timeout=100
+                        )
+                        print("Sent to Program 2:", response.status_code, file=sys.stdout)
+                        
+                        # Print responses from Program 2
+                        if response.status_code == 200:
+                            print("Program 2 response:", response.json(), file=sys.stdout)
+                        else:
+                            print("Error:", response.status_code, file=sys.stdout)
+                    except requests.exceptions.RequestException as e:
+                        print("Error sending image:", e)
+
+            # Draw bounding box
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+    trackers = detected_objects
+    return frame
+
+def main():
+    print("Starting webcam...")
+    # The webcam
+    cap = cv2.VideoCapture(0)
+
+    if not cap.isOpened():
+        print("Error: Could not open webcam.")
+        return
+        
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        processed_frame = process_frame(frame)
+        cv2.imshow("Food Detection", processed_frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
